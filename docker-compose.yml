@@ -1,0 +1,26 @@
+# Local stack with Postgres, close to how it runs in production.
+#   docker compose up --build
+#   docker compose exec api python -m pipeline prices --from 2026-01-01
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: ipo
+      POSTGRES_PASSWORD: ipo
+      POSTGRES_DB: ipo_tracker
+    ports: ["5432:5432"]
+    volumes: [pgdata:/var/lib/postgresql/data]
+
+  api:
+    build: ./backend
+    environment:
+      DATABASE_URL: postgresql+psycopg://ipo:ipo@db:5432/ipo_tracker
+      CORS_ORIGINS: http://localhost:5173
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+    ports: ["8000:8000"]
+    volumes: [rawfiles:/app/data/raw]
+    depends_on: [db]
+
+volumes:
+  pgdata:
+  rawfiles:

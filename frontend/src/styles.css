@@ -1,0 +1,515 @@
+/* Design notes
+   - Ink and paper taken from Indian banknote printing: deep indigo ink on a cool grey-blue paper.
+   - Gains are emerald, losses brick red; both are paired with a sign (+/−) so colour is never the only cue.
+   - One bold accent, marigold, marks the date you pick - on the chart and in the table column for that date.
+   - One type family (Archivo) using its width axis: semi-condensed for headings, normal width for text,
+     tabular figures everywhere numbers line up. */
+
+@import url("https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,400..800&display=swap");
+
+:root {
+  --ink: #14213d;
+  --paper: #eef1f6;
+  --panel: #ffffff;
+  --border: #d6dce6;
+  --grid: #e3e8ef;
+  --muted: #5b6577;
+  --up: #0f7a55;
+  --down: #b42318;
+  --accent: #1f5f8b;
+  --accent-2: #7a5ea8;
+  --marigold: #d99a00;
+  --marigold-wash: #fff4d6;
+  --radius-lg: 14px;
+  --radius-sm: 6px;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ink: #e6ebf4;
+    --paper: #0d1526;
+    --panel: #142038;
+    --border: #26344f;
+    --grid: #1e2b45;
+    --muted: #93a0b8;
+    --up: #3ccf91;
+    --down: #ff7a6b;
+    --accent: #6fb3e6;
+    --accent-2: #b59ce6;
+    --marigold: #f2b632;
+    --marigold-wash: #33290f;
+    color-scheme: dark;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Archivo", system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--accent);
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid var(--marigold);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.app {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 24px 48px;
+}
+
+/* ---------- top bar ---------- */
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--border);
+}
+.brand {
+  font-weight: 800;
+  font-stretch: 80%;
+  font-size: 1.25rem;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.brand-mark {
+  color: var(--up);
+  font-size: 0.9rem;
+}
+.topbar nav {
+  display: flex;
+  gap: 18px;
+}
+.topbar nav a {
+  color: var(--muted);
+  text-decoration: none;
+  padding: 4px 0;
+  border-bottom: 2px solid transparent;
+}
+.topbar nav a.active {
+  color: var(--ink);
+  border-bottom-color: var(--ink);
+}
+.asof {
+  margin-left: auto;
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+/* ---------- headings ---------- */
+h1 {
+  font-stretch: 78%;
+  font-weight: 750;
+  font-size: clamp(1.9rem, 3.2vw, 2.6rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin: 0 0 10px;
+}
+h2 {
+  font-stretch: 85%;
+  font-weight: 700;
+  font-size: 1.25rem;
+  margin: 0 0 12px;
+}
+.hero {
+  padding: 36px 0 20px;
+  max-width: 68ch;
+}
+.hero p {
+  color: var(--muted);
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+/* ---------- figures strip ---------- */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  margin: 8px 0 28px;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.stat {
+  display: flex;
+  flex-direction: column;
+  padding: 16px 20px 16px 0;
+}
+.stat + .stat {
+  padding-left: 20px;
+  border-left: 1px solid var(--border);
+}
+.stat .label {
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+.stat .value {
+  font-size: 1.75rem;
+  font-weight: 700;
+  font-stretch: 80%;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.2;
+}
+.stat .sub {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+.stat .sub.up,
+.stat .sub.down {
+  font-weight: 600;
+}
+
+.up {
+  color: var(--up);
+}
+.down {
+  color: var(--down);
+}
+.muted {
+  color: var(--muted);
+}
+.small {
+  font-size: 0.82rem;
+}
+.pad {
+  padding: 16px;
+}
+.error {
+  color: var(--down);
+}
+
+/* ---------- controls ---------- */
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 14px;
+}
+.segmented {
+  display: inline-flex;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 3px;
+  background: var(--panel);
+}
+.segmented button {
+  border: 0;
+  background: transparent;
+  padding: 6px 16px;
+  border-radius: 999px;
+  cursor: pointer;
+  color: var(--muted);
+}
+.segmented button[aria-pressed="true"] {
+  background: var(--ink);
+  color: var(--paper);
+}
+.search {
+  flex: 1 1 260px;
+  max-width: 380px;
+  padding: 9px 14px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--panel);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 10px 0 14px;
+}
+.chip {
+  border: 1px solid var(--border);
+  background: var(--panel);
+  border-radius: 999px;
+  padding: 5px 12px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+.chip[aria-pressed="true"] {
+  border-color: var(--marigold);
+  background: var(--marigold-wash);
+}
+.chip:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+.pill {
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 4px 12px;
+  font-size: 0.9rem;
+  font-variant-numeric: tabular-nums;
+}
+.link {
+  border: 0;
+  background: none;
+  color: var(--accent);
+  cursor: pointer;
+  padding: 0 4px;
+  text-decoration: underline;
+}
+.primary {
+  background: var(--ink);
+  color: var(--paper);
+  border: 0;
+  border-radius: 999px;
+  padding: 9px 22px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.primary:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+/* ---------- tables ---------- */
+.table-wrap {
+  overflow-x: auto;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+th,
+td {
+  padding: 11px 14px;
+  text-align: left;
+  border-bottom: 1px solid var(--grid);
+  vertical-align: top;
+  white-space: nowrap;
+}
+th {
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--muted);
+  background: var(--panel);
+  position: sticky;
+  top: 0;
+}
+th button {
+  border: 0;
+  background: none;
+  padding: 0;
+  color: inherit;
+  font-weight: inherit;
+  cursor: pointer;
+}
+.num {
+  text-align: right;
+}
+tbody tr:last-child td {
+  border-bottom: 0;
+}
+.ipo-table tbody tr {
+  cursor: pointer;
+}
+.ipo-table tbody tr:hover td {
+  background: var(--paper);
+}
+.company {
+  font-weight: 600;
+  white-space: normal;
+  min-width: 180px;
+}
+.badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  padding: 1px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  color: var(--muted);
+}
+.badge.sme {
+  border-color: var(--accent-2);
+  color: var(--accent-2);
+}
+
+/* the "chosen date" column wears the marigold accent, matching the line on the chart */
+.cat-table th:last-child,
+.cat-table td:last-child {
+  background: var(--marigold-wash);
+}
+.cat-table td.num div:first-child {
+  font-weight: 600;
+}
+
+/* ---------- detail ---------- */
+.back {
+  display: inline-block;
+  margin-top: 24px;
+  text-decoration: none;
+}
+.detail-head {
+  padding: 12px 0 8px;
+}
+.detail-head p {
+  margin: 0;
+}
+.meta-line {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+  color: var(--muted);
+}
+.card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  margin-bottom: 20px;
+}
+.card .table-wrap {
+  border-radius: var(--radius-sm);
+  margin: 4px 0 10px;
+}
+.card-head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: baseline;
+  justify-content: space-between;
+}
+.date-picker {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-size: 0.9rem;
+}
+.date-picker input {
+  padding: 6px 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--panel);
+}
+.chart {
+  margin-top: 4px;
+}
+.chart .recharts-wrapper {
+  cursor: crosshair;
+}
+
+/* ---------- ask ---------- */
+.ask-form textarea {
+  width: 100%;
+  padding: 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--panel);
+  resize: vertical;
+}
+.ask-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 8px 0;
+}
+.answer {
+  white-space: pre-wrap;
+  margin-top: 0;
+  max-width: 75ch;
+}
+.calls {
+  padding-left: 18px;
+}
+.calls code {
+  font-size: 0.82rem;
+  word-break: break-all;
+}
+
+footer {
+  margin-top: 40px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.85rem;
+  max-width: 90ch;
+}
+
+@media (max-width: 640px) {
+  /* on phones each category becomes a small stacked block instead of a wide row */
+  .cat-table thead {
+    display: none;
+  }
+  .cat-table tr {
+    display: block;
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--grid);
+  }
+  .cat-table td {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 16px;
+    padding: 4px 0;
+    border: 0;
+    white-space: normal;
+  }
+  .cat-table td > div {
+    grid-column: 2;
+    text-align: right;
+  }
+  .cat-table td[data-label]::before {
+    content: attr(data-label);
+    grid-row: span 2;
+    color: var(--muted);
+    font-size: 0.85rem;
+    text-align: left;
+  }
+  .cat-table td:first-child > div {
+    grid-column: 1 / -1;
+    text-align: left;
+  }
+  .cat-table td:last-child {
+    margin: 4px -14px -12px;
+    padding: 6px 14px;
+  }
+  .app {
+    padding: 0 16px 40px;
+  }
+  .topbar {
+    flex-wrap: wrap;
+    gap: 12px 20px;
+  }
+  .asof {
+    margin-left: 0;
+    width: 100%;
+  }
+  .stat + .stat {
+    padding-left: 0;
+    border-left: 0;
+    border-top: 1px solid var(--border);
+  }
+}

@@ -1,0 +1,41 @@
+name: Daily prices
+
+# 7:30 pm IST on weekdays, after both exchanges publish their end-of-day files.
+on:
+  schedule:
+    - cron: "0 14 * * 1-5"
+  workflow_dispatch: {}
+
+jobs:
+  ingest:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
+    env:
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: backend/requirements.txt
+      - run: pip install -r requirements.txt
+
+      # Keep downloaded exchange files between runs so a day is never fetched twice.
+      - uses: actions/cache@v4
+        with:
+          path: backend/data/raw
+          key: raw-${{ github.run_id }}
+          restore-keys: raw-
+
+      - name: Load IPO list and corporate actions
+        run: python -m pipeline load
+      - name: Download the last 10 trading days
+        # NSE often blocks cloud IPs; the BSE file and the Yahoo step below cover for it.
+        run: python -m pipeline daily --days 10
+      - name: Fill gaps from Yahoo Finance
+        run: python -m pipeline yahoo-gaps
+      - name: Check the data
+        run: python -m pipeline validate

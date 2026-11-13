@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+.ruff_cache/
+
+# Data produced locally (the master and corporate-action CSVs ARE committed)
+backend/data/ipo.db*
+backend/data/raw/
+
+# Node
+frontend/node_modules/
+frontend/dist/
+frontend/*.tsbuildinfo
+
+# Secrets
+.env
+backend/.env
+frontend/.env.local
+.DS_Store
