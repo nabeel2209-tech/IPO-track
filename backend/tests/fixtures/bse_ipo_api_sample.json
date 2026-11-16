@@ -1,0 +1,459 @@
+{
+ "_about": "Real responses from api.bseindia.com/BseIndiaAPI/api (Nov 2026), cut down to the rows and fields the collector reads.",
+ "listings": {
+  "Table": [
+   {
+    "CompanyName": "Antala Industries Limited",
+    "IssuePrice": 66,
+    "ListedOn": "2026-11-11T00:00:00",
+    "ListingDayClose": 50.16,
+    "IMAGE": "https://www.bseindia.com/stock-share-price/antala-industries-ltd/antala/545024/"
+   },
+   {
+    "CompanyName": "Dhaval Packaging Limited",
+    "IssuePrice": 97,
+    "ListedOn": "2026-08-06T00:00:00",
+    "ListingDayClose": 111.68,
+    "IMAGE": "https://www.bseindia.com/stock-share-price/dhaval-packaging-ltd/dhaval/544854/"
+   },
+   {
+    "CompanyName": "HARIKANTA OVERSEAS LIMITED",
+    "IssuePrice": 91,
+    "ListedOn": "2026-06-02T00:00:00",
+    "ListingDayClose": 75.77,
+    "IMAGE": "https://www.bseindia.com/stock-share-price/harikanta-overseas-ltd/harikanta/544769/"
+   },
+   {
+    "CompanyName": "LIOTECH INDUSTRIES LIMITED",
+    "IssuePrice": 321,
+    "ListedOn": "2026-06-24T00:00:00",
+    "ListingDayClose": 244.15,
+    "IMAGE": "https://www.bseindia.com/stock-share-price/liotech-industries-ltd/liotech/544796/"
+   }
+  ]
+ },
+ "headers": {
+  "545024": {
+   "SecurityId": "ANTALA",
+   "Grp_Index": "MT / BSE SME IPO",
+   "FaceVal": "10.00",
+   "SecurityCode": "545024",
+   "ISIN": "INE15Z101013",
+   "Group": "MT"
+  },
+  "544854": {
+   "SecurityId": "DHAVAL",
+   "Grp_Index": "M / BSE SME IPO",
+   "FaceVal": "10.00",
+   "SecurityCode": "544854",
+   "ISIN": "INE1HX301016",
+   "Group": "M"
+  },
+  "544769": {
+   "SecurityId": "HARIKANTA",
+   "Grp_Index": "M / BSE SME IPO",
+   "FaceVal": "10.00",
+   "SecurityCode": "544769",
+   "ISIN": "INE1UYW01010",
+   "Group": "M"
+  },
+  "544796": {
+   "SecurityId": "LIOTECH",
+   "Grp_Index": "M / BSE SME IPO",
+   "FaceVal": "10.00",
+   "SecurityCode": "544796",
+   "ISIN": "INE0TKX01011",
+   "Group": "M"
+  }
+ },
+ "issues": {
+  "IPO": {
+   "Table": [
+    {
+     "Scrip_cd": 4916,
+     "Scrip_Name": "ANTALA INDUSTRIES LIMITED",
+     "Start_Dt": "2026-10-29T00:00:00",
+     "End_Dt": "2026-11-05T00:00:00",
+     "Price_Band": "62.00 - 66.00",
+     "Face_Val": 10,
+     "IR_flag": "IPO",
+     "IR_FLAG_FULL": "Book Building",
+     "Status": "H",
+     "IPO_NO": 8070,
+     "Is_retailertype": 1,
+     "eXCHANGE_PLATFORM": "SME"
+    },
+    {
+     "Scrip_cd": 4708,
+     "Scrip_Name": "DHAVAL PACKAGING LIMITED",
+     "Start_Dt": "2026-07-30T00:00:00",
+     "End_Dt": "2026-08-03T00:00:00",
+     "Price_Band": "92.00 - 97.00",
+     "Face_Val": 10,
+     "IR_flag": "IPO",
+     "IR_FLAG_FULL": "Book Building",
+     "Status": "H",
+     "IPO_NO": 7854,
+     "Is_retailertype": 1,
+     "eXCHANGE_PLATFORM": "SME"
+    },
+    {
+     "Scrip_cd": 4590,
+     "Scrip_Name": "HARIKANTA OVERSEAS LIMITED",
+     "Start_Dt": "2026-05-20T00:00:00",
+     "End_Dt": "2026-05-27T00:00:00",
+     "Price_Band": "91.00 - 96.00",
+     "Face_Val": 10,
+     "IR_flag": "IPO",
+     "IR_FLAG_FULL": "Book Building",
+     "Status": "H",
+     "IPO_NO": 7722,
+     "Is_retailertype": 1,
+     "eXCHANGE_PLATFORM": "SME"
+    },
+    {
+     "Scrip_cd": 4911,
+     "Scrip_Name": "BOMBAY COATED AND SPECIAL STEELS LIMITED",
+     "Start_Dt": "2026-10-29T00:00:00",
+     "End_Dt": "2026-11-02T00:00:00",
+     "Price_Band": "78.00 - 82.00",
+     "Face_Val": 10,
+     "IR_flag": "IPO",
+     "IR_FLAG_FULL": "Book Building",
+     "Status": "H",
+     "IPO_NO": 8065,
+     "Is_retailertype": 1,
+     "eXCHANGE_PLATFORM": "MainBoard"
+    },
+    {
+     "Scrip_cd": 4903,
+     "Scrip_Name": "CONTINENTAL CONTROLS LTD",
+     "Start_Dt": "2026-10-20T00:00:00",
+     "End_Dt": "2026-11-03T00:00:00",
+     "Price_Band": "10.00",
+     "Face_Val": 10,
+     "IR_flag": "RI",
+     "IR_FLAG_FULL": "Rights Issue",
+     "Status": "H",
+     "IPO_NO": 8057,
+     "Is_retailertype": 1,
+     "eXCHANGE_PLATFORM": "MainBoard"
+    }
+   ]
+  },
+  "FPO": {
+   "Table": [
+    {
+     "Scrip_cd": 4634,
+     "Scrip_Name": "LIOTECH INDUSTRIES LIMITED",
+     "Start_Dt": "2026-06-17T00:00:00",
+     "End_Dt": "2026-06-19T00:00:00",
+     "Price_Band": "321.00",
+     "Face_Val": 10,
+     "IR_flag": "FPO",
+     "IR_FLAG_FULL": "Fixed Price",
+     "Status": "H",
+     "IPO_NO": 7778,
+     "Is_retailertype": 1,
+     "eXCHANGE_PLATFORM": "SME"
+    }
+   ]
+  }
+ },
+ "details": {
+  "8070": {
+   "TableRows": [
+    {
+     "Label": "ScripName",
+     "Label_flg": null,
+     "Value": "ANTALA INDUSTRIES LIMITED",
+     "LinkText": null,
+     "LinkUrl": null,
+     "IsBold": true,
+     "IsMultiLine": false,
+     "MultilineValues": null
+    },
+    {
+     "Label": "Symbol",
+     "Label_flg": null,
+     "Value": "ANTALA",
+     "LinkText": null,
+     "LinkUrl": null,
+     "IsBold": true,
+     "IsMultiLine": false,
+     "MultilineValues": null
+    },
+    {
+     "Label": "Issue Period",
+     "Label_flg": null,
+     "Value": "29 Oct 2026 to 05 Nov 2026|Issue is extended from 02nd November 2026 to 05th November 2026.",
+     "LinkText": null,
+     "LinkUrl": null,
+     "IsBold": true,
+     "IsMultiLine": false,
+     "MultilineValues": null
+    },
+    {
+     "Label": "Price Band",
+     "Label_flg": null,
+     "Value": "62.00-66.00",
+     "LinkText": null,
+     "LinkUrl": null,
+     "IsBold": true,
+     "IsMultiLine": false,
+     "MultilineValues": null
+    },
+    {
+     "Label": "IPO Categories",
+     "Label_flg": null,
+     "Value": "FI, IC, MF, FII, OTH, CO, IND, NOH",
+     "LinkText": null,
+     "LinkUrl": null,
+     "IsBold": true,
+     "IsMultiLine": false,
+     "MultilineValues": null
+    },
+    {
+     "Label": "Market Lot",
+     "Label_flg": null,
+     "Value": "2,000",
+     "LinkText": null,
+     "LinkUrl": null,
+     "IsBold": true,
+     "IsMultiLine": false,
+     "MultilineValues": null
+    },
+    {
+     "Label": "Minimum Bid Quantity",
+     "Label_flg": null,
+     "Value": "4,000",
+     "LinkText": null,
+     "LinkUrl": null,
+     "IsBold": true,
+     "IsMultiLine": false,
+     "MultilineValues": null
+    }
+   ]
+  },
+  "7854": {
+   "TableRows": [
+    {
+     "Label": "ScripName",
+     "Label_flg": null,
+     "Value": "DHAVAL PACKAGING LIMITED",
+     "LinkText": null,
+     "LinkUrl": null,
+     "IsBold": true,
+     "IsMultiLine": false,
+     "MultilineValues": null
+    },
+    {
+     "Label": "Symbol",
+     "Label_flg": null,
+     "Value": "DHAVALPACK",
+     "LinkText": null,
+     "LinkUrl": null,
+     "IsBold": true,
+     "IsMultiLine": false,
+     "MultilineValues": null
+    },
+    {
+     "Label": "Issue Period",
+     "Label_flg": null,
+     "Value": "30 Jul 2026 to 03 Aug 2026",
+     "LinkText": null,
+     "LinkUrl": null,
+     "IsBold": true,
+     "IsMultiLine": false,
+     "MultilineValues": null
+    },
+    {
+     "Label": "Price Band",
+     "Label_flg": null,
+     "Value": null,
+     "LinkText": null,
+     "LinkUrl": null,
+     "IsBold": true,
+     "IsMultiLine": true,
+     "MultilineValues": [
+      "92.00-97.00",
+      "/Discount of Rs 5/- available for Employees bidding in the Employee Reservation Portion",
+      ""
+     ]
+    },
+    {
+     "Label": "IPO Categories",
+     "Label_flg": null,
+     "Value": "FI, IC, MF, FII, OTH, CO, IND, NOH, EMP",
+     "LinkText": null,
+     "LinkUrl": null,
+     "IsBold": true,
+     "IsMultiLine": false,
+     "MultilineValues": null
+    },
+    {
+     "Label": "Market Lot",
+     "Label_flg": null,
+     "Value": "1,200",
+     "LinkText": null,
+     "LinkUrl": null,
+     "IsBold": true,
+     "IsMultiLine": false,
+     "MultilineValues": null
+    },
+    {
+     "Label": "Minimum Bid Quantity",
+     "Label_flg": null,
+     "Value": "1,200",
+     "LinkText": null,
+     "LinkUrl": null,
+     "IsBold": true,
+     "IsMultiLine": false,
+     "MultilineValues": null
+    }
+   ]
+  },
+  "7722": {
+   "TableRows": [
+    {
+     "Label": "ScripName",
+     "Label_flg": null,
+     "Value": "HARIKANTA OVERSEAS LIMITED",
+     "LinkText": null,
+     "LinkUrl": null,
+     "IsBold": true,
+     "IsMultiLine": false,
+     "MultilineValues": null
+    },
+    {
+     "Label": "Symbol",
+     "Label_flg": null,
+     "Value": "HARIKANTA",
+     "LinkText": null,
+     "LinkUrl": null,
+     "IsBold": true,
+     "IsMultiLine": false,
+     "MultilineValues": null
+    },
+    {
+     "Label": "Issue Period",
+     "Label_flg": null,
+     "Value": "20 May 2026 to 27 May 2026|Issue is extended from 22nd May 2026 to 27th May 2026.",
+     "LinkText": null,
+     "LinkUrl": null,
+     "IsBold": true,
+     "IsMultiLine": false,
+     "MultilineValues": null
+    },
+    {
+     "Label": "Price Band",
+     "Label_flg": null,
+     "Value": null,
+     "LinkText": null,
+     "LinkUrl": null,
+     "IsBold": true,
+     "IsMultiLine": true,
+     "MultilineValues": [
+      "91.00-96.00",
+      "/The revised price band w.e.f. 25/05/2026 will be Rs.86/- to Rs. 91/-",
+      ""
+     ]
+    },
+    {
+     "Label": "IPO Categories",
+     "Label_flg": null,
+     "Value": "FI, IC, MF, FII, OTH, CO, IND, NOH",
+     "LinkText": null,
+     "LinkUrl": null,
+     "IsBold": true,
+     "IsMultiLine": false,
+     "MultilineValues": null
+    },
+    {
+     "Label": "Market Lot",
+     "Label_flg": null,
+     "Value": "1,200",
+     "LinkText": null,
+     "LinkUrl": null,
+     "IsBold": true,
+     "IsMultiLine": false,
+     "MultilineValues": null
+    },
+    {
+     "Label": "Minimum Bid Quantity",
+     "Label_flg": null,
+     "Value": "2,400",
+     "LinkText": null,
+     "LinkUrl": null,
+     "IsBold": true,
+     "IsMultiLine": false,
+     "MultilineValues": null
+    }
+   ]
+  },
+  "7778": {
+   "TableRows": [
+    {
+     "Label": "ScripName",
+     "Label_flg": null,
+     "Value": "LIOTECH INDUSTRIES LIMITED",
+     "LinkText": null,
+     "LinkUrl": null,
+     "IsBold": true,
+     "IsMultiLine": false,
+     "MultilineValues": null
+    },
+    {
+     "Label": "Symbol",
+     "Label_flg": null,
+     "Value": "LIOTECH",
+     "LinkText": null,
+     "LinkUrl": null,
+     "IsBold": true,
+     "IsMultiLine": false,
+     "MultilineValues": null
+    },
+    {
+     "Label": "Issue Period",
+     "Label_flg": null,
+     "Value": "17 Jun 2026 to 19 Jun 2026",
+     "LinkText": null,
+     "LinkUrl": null,
+     "IsBold": true,
+     "IsMultiLine": false,
+     "MultilineValues": null
+    },
+    {
+     "Label": "IPO Categories",
+     "Label_flg": null,
+     "Value": "FI, IC, MF, FII, OTH, CO, IND, NOH",
+     "LinkText": null,
+     "LinkUrl": null,
+     "IsBold": true,
+     "IsMultiLine": false,
+     "MultilineValues": null
+    },
+    {
+     "Label": "Market Lot",
+     "Label_flg": null,
+     "Value": "400",
+     "LinkText": null,
+     "LinkUrl": null,
+     "IsBold": true,
+     "IsMultiLine": false,
+     "MultilineValues": null
+    },
+    {
+     "Label": "Minimum Bid Quantity",
+     "Label_flg": null,
+     "Value": "800",
+     "LinkText": null,
+     "LinkUrl": null,
+     "IsBold": true,
+     "IsMultiLine": false,
+     "MultilineValues": null
+    }
+   ]
+  }
+ }
+}

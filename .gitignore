@@ -19,3 +19,6 @@ frontend/*.tsbuildinfo
 backend/.env
 frontend/.env.local
 .DS_Store
+
+# leftovers from tools that open files in place on a mounted folder
+.fuse_hidden*

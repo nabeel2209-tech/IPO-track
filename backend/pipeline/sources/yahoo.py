@@ -26,7 +26,7 @@ def as_traded(yahoo_close: float, day: date, actions: Iterable[tuple[date, float
     for ex_date, multiplier in actions:
         if ex_date > day:
             m *= multiplier
-    return yahoo_close * m
+    return round(yahoo_close * m, 2)  # Yahoo sends float32-style values like 668.0999755859375
 
 
 def fetch_history(isin: str, ticker: str, exchange: str, start: date, end: date, actions: list[tuple[date, float]], downloader=None) -> list[PriceRow]:

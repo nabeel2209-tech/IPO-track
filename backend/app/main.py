@@ -4,6 +4,7 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import RedirectResponse
 
 from app.api import ask, ipos
 from app.config import get_settings
@@ -30,6 +31,12 @@ app.add_middleware(
 )
 app.include_router(ipos.router)
 app.include_router(ask.router)
+
+
+@app.get("/", include_in_schema=False)
+def root() -> RedirectResponse:
+    """The API has no page of its own; send anyone who opens it to the interactive docs."""
+    return RedirectResponse("/docs")
 
 
 @app.get("/api/health", tags=["meta"])

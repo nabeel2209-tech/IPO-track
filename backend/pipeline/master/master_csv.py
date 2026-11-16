@@ -1,8 +1,8 @@
 """The IPO master list lives in ``data/ipo_master.csv``, checked into git.
 
 Keeping it as a reviewed CSV ("data as code") means every change to an IPO's details shows up as a
-diff in a pull request. The collector only updates rows whose ``source`` is ``nse_api``; rows a
-person has corrected by hand (``source`` = ``manual``) are never overwritten.
+diff in a pull request. Each collector only rewrites the rows it created (``source`` = ``nse_api``
+or ``bse_api``); rows a person has corrected by hand (``source`` = ``manual``) are never overwritten.
 """
 
 import csv
@@ -90,7 +90,12 @@ def write(path: Path, records: list[dict]) -> None:
 
 
 def merge(existing: list[dict], collected: list[dict]) -> tuple[list[dict], int, int]:
-    """Add new IPOs and refresh collector-owned rows. Returns (records, added, updated)."""
+    """Add new IPOs and refresh rows the collector owns. Returns (records, added, updated).
+
+    A collector owns the rows it created (same ``source``) and may change them. In a row owned by
+    someone else (another collector, or a person: ``source`` = ``manual``) it only fills blank cells,
+    so nothing a person typed is ever overwritten.
+    """
     by_isin = {r["isin"]: r for r in existing}
     added = updated = 0
     for new in collected:
@@ -100,13 +105,16 @@ def merge(existing: list[dict], collected: list[dict]) -> tuple[list[dict], int,
             row["exchanges"] = row.get("exchanges") or "NSE,BSE"
             by_isin[new["isin"]] = row
             added += 1
-        elif old.get("source") != "manual":
-            changed = False
-            for c in COLUMNS:
-                if c in new and new[c] is not None and old.get(c) != new[c] and c not in ("bse_code", "exchanges", "notes"):
-                    old[c] = new[c]
-                    changed = True
-            updated += int(changed)
+            continue
+        owner = old.get("source") == new.get("source")
+        changed = False
+        for c in COLUMNS:
+            if c in ("source", "notes") or new.get(c) is None or old.get(c) == new[c]:
+                continue
+            if owner or old.get(c) in (None, ""):
+                old[c] = new[c]
+                changed = True
+        updated += int(changed)
     return list(by_isin.values()), added, updated
 
 

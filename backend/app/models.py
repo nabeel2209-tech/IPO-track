@@ -1,10 +1,11 @@
 """Database tables.
 
-Four tables, each with one job:
+Five tables, each with one job:
 - ``ipos``: one row per IPO (the "master" data: issue price, lot size, quotas...).
 - ``prices``: one end-of-day price per stock, per exchange, per trading day.
 - ``corporate_actions``: splits and bonuses, needed to compare today's price with the issue price.
 - ``ingestion_runs``: a log of every download attempt, so failed days can be retried.
+- ``history_loads``: which IPOs have had their full price history loaded (see ``ingest.catch_up``).
 """
 
 from datetime import date, datetime
@@ -99,3 +100,18 @@ class IngestionRun(Base):
     rows_loaded: Mapped[int] = mapped_column(Integer, default=0)
     message: Mapped[str | None] = mapped_column(Text)
     created_at: Mapped[datetime] = mapped_column(DateTime, server_default=func.now())
+
+
+class HistoryLoad(Base):
+    """One row per IPO whose price history has been read from every loaded day's file.
+
+    Daily files are loaded once and only rows for the IPOs known at that moment are kept. An IPO
+    added to the master list later has no row here, which is how ``ingest.catch_up`` knows to go
+    back through the saved files for it.
+    """
+
+    __tablename__ = "history_loads"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    isin: Mapped[str] = mapped_column(String(12), unique=True, index=True)
+    loaded_at: Mapped[datetime] = mapped_column(DateTime, server_default=func.now())

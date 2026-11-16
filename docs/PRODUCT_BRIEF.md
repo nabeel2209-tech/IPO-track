@@ -22,9 +22,9 @@ Indian IPO coverage is built around the day an IPO opens: grey-market premiums, 
 
 ## Scope of version one
 
-In: 2026 mainboard and NSE Emerge SME IPOs, all five categories, listing-day / today / any-date P&L, split and bonus adjustment, AI questions with a usage limit.
+In: 2026 mainboard, NSE Emerge and BSE SME IPOs (298 so far), all five categories, listing-day / today / any-date P&L, split and bonus adjustment, AI questions with a usage limit.
 
-Out (for now): BSE-only SME IPOs, dividends and tax, live intraday prices, user accounts and saved portfolios, alerts.
+Out (for now): dividends and tax, live intraday prices, user accounts and saved portfolios, alerts.
 
 ## Key decisions and trade-offs
 
@@ -34,6 +34,10 @@ Out (for now): BSE-only SME IPOs, dividends and tax, live intraday prices, user 
 
 ## Next
 
-1. BSE SME collector (largest coverage gap).
-2. "Compare categories" view: return on money blocked, adjusted for allotment odds using subscription figures.
-3. Saved watchlist and an email when a tracked IPO crosses a threshold.
+1. "Compare categories" view: return on money blocked, adjusted for allotment odds using subscription figures.
+2. Saved watchlist and an email when a tracked IPO crosses a threshold.
+3. Subscription figures for BSE SME IPOs (BSE publishes them per issue; not collected yet).
+
+## Shipped since version one
+
+- BSE SME platform IPOs (128 in 2026), which was the largest coverage gap: SME coverage went from 63 to 191 IPOs.

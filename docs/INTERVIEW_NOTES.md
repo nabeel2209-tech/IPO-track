@@ -10,6 +10,10 @@ Short prompts to help you explain the project by role. Read the code paths menti
 - **Data quality**: validation gates (`pipeline/validate.py`): every IPO has a listing-day price, NSE and BSE agree within 3%, and no unexplained overnight move beyond the 20% price band.
 - **A real data bug**: exchange prices aren't split-adjusted and Yahoo's are retroactively adjusted. Explain how prices are stored as traded and adjusted at read time, and how Yahoo's adjustment is undone.
 - **Data as code**: the IPO master list is a reviewed CSV in git, collector-owned rows vs hand-corrected rows.
+- **Entity matching without a shared key**: BSE's issue record and listed-stock record have no common ID; joined by trading symbol, then normalised company name, within a 45-day window (`pipeline/master/bse_collector.py`). 128 of 128 matched on 2026 data; unmatched rows are reported, not guessed.
+- **Late-arriving dimensions**: an IPO added to the master list after its trading days were loaded gets its history by re-reading archived raw files (`ingest.catch_up`), which is why raw files are kept.
+- **A bug you shipped and fixed** (good interview story): the first catch-up inferred "needs history" from the prices held. A new IPO that already had today's price looked complete and got only its listing day. Fix: record completeness explicitly in a `history_loads` table, plus a regression test. Lesson: track state, don't infer it.
+- **Knowing your data**: SME stocks don't trade every day, so "missing" has to mean something different for them (`ingest.yahoo_gaps`, `validate.py`).
 - *Likely follow-ups*: How would you backfill five years? (Cached raw files, parallel days, bulk inserts.) How would you schedule it? (GitHub Actions now; Airflow or Dagster with one task per source and date if it grew.)
 
 ## SDE
@@ -32,5 +36,5 @@ Short prompts to help you explain the project by role. Read the code paths menti
 
 - **The user problem**: applicants care about rupees made per category, not just listing-day percentages (`docs/PRODUCT_BRIEF.md`).
 - **A product decision with a reason**: showing the *minimum* application because oversubscribed categories allot exactly that.
-- **Trade-offs you made**: official data over a broker API (cost, daily token renewal, licensing), version-one scope (BSE SME left out), and how you'd measure success.
-- **What's next and why**: the BSE SME collector closes the biggest coverage gap; a compare-categories view answers the next question users ask.
+- **Trade-offs you made**: official data over a broker API (cost, daily token renewal, licensing), version-one scope (BSE SME left out at first, then added once the core worked), and how you'd measure success.
+- **Sequencing**: BSE SME was the biggest coverage gap (128 of 298 IPOs), so it shipped next; a compare-categories view answers the next question users ask.

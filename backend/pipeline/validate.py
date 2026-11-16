@@ -18,6 +18,7 @@ from pipeline.ingest import trading_days
 class Report:
     errors: list[str] = field(default_factory=list)
     warnings: list[str] = field(default_factory=list)
+    notes: list[str] = field(default_factory=list)  # for information only
 
     @property
     def ok(self) -> bool:
@@ -29,6 +30,7 @@ def run(session: Session, today: date | None = None, max_exchange_gap: float = 0
     days = trading_days(session)
     last_day = days[-1] if days else None
     ipos = session.execute(select(Ipo)).scalars().all()
+    quiet_sme = 0
 
     for ipo in ipos:
         prices = session.execute(select(Price).where(Price.isin == ipo.isin)).scalars().all()
@@ -41,7 +43,9 @@ def run(session: Session, today: date | None = None, max_exchange_gap: float = 0
                 rep.errors.append(f"{tag}: no price on listing day {ipo.listing_date}")
             have = {p.trade_date for p in prices}
             gaps = [d for d in days if d >= ipo.listing_date and d not in have]
-            if gaps:
+            if gaps and ipo.segment == "sme":
+                quiet_sme += 1  # normal: thinly traded SME stocks skip days
+            elif gaps:
                 rep.warnings.append(f"{tag}: {len(gaps)} trading day(s) without a price, first {gaps[0]}")
         # NSE and BSE should agree closely on the same day
         by_day: dict[date, dict[str, float]] = {}
@@ -50,6 +54,9 @@ def run(session: Session, today: date | None = None, max_exchange_gap: float = 0
         for d, ex in by_day.items():
             if "NSE" in ex and "BSE" in ex and abs(ex["NSE"] / ex["BSE"] - 1) > max_exchange_gap:
                 rep.warnings.append(f"{tag}: NSE {ex['NSE']} vs BSE {ex['BSE']} on {d}")
+
+    if quiet_sme:
+        rep.notes.append(f"{quiet_sme} SME IPOs have days with no trades (expected for thinly traded stocks)")
 
     for s in detect(session):
         hint = f" - likely a split/bonus with multiplier {s.suggested_multiplier:g}" if s.suggested_multiplier else ""

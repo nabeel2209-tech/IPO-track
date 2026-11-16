@@ -11,7 +11,17 @@ from pathlib import Path
 
 import httpx
 
-from pipeline.http import get_bytes
+from pipeline.http import NoFile, get_bytes
+
+
+def looks_like_bhavcopy(payload: bytes) -> bool:
+    """A real file is a zip (NSE) or a CSV starting with the UDiFF header (BSE).
+
+    On market holidays BSE doesn't return a 404: it answers 200 with its website's HTML page. Without
+    this check that page would be saved as the day's file and reported as a parsing failure.
+    """
+    head = payload[:16].lstrip(b"\xef\xbb\xbf").lstrip()
+    return head.startswith(b"PK") or head.startswith(b"TradDt")
 
 
 @dataclass
@@ -31,8 +41,11 @@ class BhavcopySource:
 
     def fetch(self, client: httpx.Client, day: date, raw_dir: Path, *, use_cache: bool = True, sleep=None) -> bytes:
         path = self.raw_path(raw_dir, day)
-        if use_cache and path.exists() and path.stat().st_size > 0:
-            return path.read_bytes()
+        if use_cache and path.exists():
+            cached = path.read_bytes()
+            if looks_like_bhavcopy(cached):
+                return cached
+            path.unlink()  # an older run saved a web page here; fetch again
         if self.warmup_url and not client.cookies:
             try:  # sets the cookies NSE checks for; failure here is not fatal
                 client.get(self.warmup_url)
@@ -43,6 +56,8 @@ class BhavcopySource:
         if sleep is not None:
             kwargs["sleep"] = sleep
         data = get_bytes(client, self.url(day), **kwargs)
+        if not looks_like_bhavcopy(data):
+            raise NoFile(f"{self.exchange} returned a web page instead of a file for {day} (market holiday?)")
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_bytes(data)
         return data
