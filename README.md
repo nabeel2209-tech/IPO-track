@@ -11,7 +11,7 @@
 
 Pick any 2026 mainboard or SME IPO and see the minimum application for each investor category (retail, small HNI, big HNI, employee and shareholder quotas), and what that application was worth on listing day, today, and on any date you choose. Prices are adjusted for splits and bonuses so they always compare fairly with the issue price. An "Ask AI" page answers questions in plain English using the same data.
 
-Built with **FastAPI · SQLAlchemy · React + TypeScript · a Python data pipeline · Claude (tool use)**.
+Built with **FastAPI · SQLAlchemy · React + TypeScript · a Python data pipeline **.
 
 **Coverage:** all 298 IPOs listed in India in 2026 up to 11 November: 107 mainboard, 63 on NSE Emerge and 128 on the BSE SME platform, with daily prices from the exchanges' own end-of-day files.
 
@@ -103,7 +103,7 @@ A broker API (for example Dhan) was considered and left out of version one: it c
 
 When a category is oversubscribed, winners are picked by lottery and each gets the minimum application, which is why P&L is shown for the minimum. An IPO's offer document can override these (`individual_min_lots`, `snii_min_lots`, `bnii_min_lots` in the master CSV). The SME rules follow NSE circular IPO68604.
 
-## Run it on your Mac
+## Run it on your Computer
 
 You need Python 3.10+ and Node 18+. macOS's built-in Python is 3.9, so install a newer one first (`brew install python@3.12 node`) and run `make setup PYTHON=python3.12`.
 
